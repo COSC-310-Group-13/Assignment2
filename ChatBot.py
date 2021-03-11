@@ -70,13 +70,3 @@ p.extractQuotes('anxiety.txt')
 
 print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!")
 exitWords = ['bye','quit','exit','see ya','good bye']
-
-while(True):
-    userInput = input()
-    if userInput.lower() in exitWords:
-        print("It was really nice talking to you!")
-    else:
-        if p.helloMessage(userInput) != None:
-            print("Calm Bot: " + p.helloMessage(userInput))
-        else:
-            print("Calm Bot: " + p.botResponse(userInput))
