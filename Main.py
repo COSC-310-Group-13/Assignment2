@@ -1,6 +1,10 @@
 from ChatBot import ChatBot
+from ChatBot import install
 
 #Main class where the bot will be run from.
+
+install('nltk')
+install('scikit-learn')
 
 cb = ChatBot()
 cb.extractQuotes('quotes.txt') #we establish the quotes in the object

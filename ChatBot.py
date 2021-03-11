@@ -2,6 +2,8 @@
     # nltk, scikit-learn
 
 #Import libraries
+import subprocess
+import sys
 import random
 import string
 import nltk
@@ -13,6 +15,9 @@ nltk.download('punkt', quiet = True)  #this package is required to tokenize sent
 #When the bot runs, it runs a similarity test between each quote in the list and the input of the user
 #The quote that is most similar to the users' input is outputted so that quotes match the topic the user talks about
 
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
 #Import quotes from file
 class ChatBot():
 
@@ -23,7 +28,7 @@ class ChatBot():
         print("bot initialized")
         
     def extractQuotes(self, fileName):
-        file = open("quotes.txt", 'r', encoding='utf-8')
+        file = open(fileName, 'r', encoding='utf-8')
         text = file.read()
         file.close()
         self.quotes = nltk.sent_tokenize(text)
@@ -43,17 +48,10 @@ class ChatBot():
 
     def sortIndexList(self, scoresList):
         length = len(scoresList)
-<<<<<<< HEAD
         retList = list(range(0,length))
         
         for i in range(length):
             for j in range(length):
-=======
-        retList = list(range(0,length -1))
-
-        for i in range(length - 1):
-            for j in range(length -1):
->>>>>>> ac5ee37c62462e7562071b9252644d0b1d86bd74
                 if scoresList[retList[i]] > scoresList[retList[j]]:
                     temp = retList[i]
                     retList[i] = retList[j]
@@ -68,45 +66,11 @@ class ChatBot():
         similarityScores = cosine_similarity(countArray[-1], countArray)    ##each quote and the users input to output the most similar one
         similarityScoresList = similarityScores.flatten()   #similarityScores is not a 1 dimensional array, so we flatten it
         indexOfQuote = self.sortIndexList(similarityScoresList)  #this gives us the indices of the most similar to least similar quotes
-<<<<<<< HEAD
         indexOfQuote = indexOfQuote[1:]
         if similarityScoresList[indexOfQuote[0]] != 0.00:
             self.quotes.remove(userInput)
-=======
-        self.quotes.remove(userInput)
-        print(len(similarityScoresList), " and ", len(indexOfQuote))
-        if similarityScoresList[indexOfQuote[0]].any() != 0.00:
->>>>>>> ac5ee37c62462e7562071b9252644d0b1d86bd74
             return response + self.quotes[indexOfQuote[0]]
         else:
             self.quotes.remove(userInput)   
             return response + "I'm sorry, I didn't quite understand what you just typed."
 
-<<<<<<< HEAD
-
-
-
-cb = ChatBot()
-cb.extractQuotes('quotes.txt') #we establish the quotes in the object
-print(len(cb.quotes))
-=======
-p = ChatBot()
-p.extractQuotes('quotes.txt')
->>>>>>> ac5ee37c62462e7562071b9252644d0b1d86bd74
-
-print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!")
-
-exitWords = ['bye','quit','exit','see ya','good bye']
-<<<<<<< HEAD
-
-while(True):
-    userInput = input()
-    if userInput.lower() in exitWords:
-        print("It was really nice talking to you!")
-    else:
-        if cb.helloMessage(userInput) != None:
-            print("Calm Bot: " + cb.helloMessage(userInput))
-        else:
-            print("Calm Bot: " + cb.botResponse(userInput))
-=======
->>>>>>> ac5ee37c62462e7562071b9252644d0b1d86bd74
