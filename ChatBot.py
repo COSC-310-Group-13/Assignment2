@@ -21,7 +21,7 @@ class ChatBot():
         print("bot initialized")
         
     def extractQuotes(self, fileName):
-        file = open(fileName, 'r', encoding='utf-8')
+        file = open("quotes.txt", 'r', encoding='utf-8')
         text = file.read()
         file.close()
         self.quotes = nltk.sent_tokenize(text)
@@ -41,10 +41,10 @@ class ChatBot():
 
     def sortIndexList(self, scoresList):
         length = len(scoresList)
-        retList = list(range(0,length))
+        retList = list(range(0,length -1))
 
         for i in range(length - 1):
-            for j in range(length - 1):
+            for j in range(length -1):
                 if scoresList[retList[i]] > scoresList[retList[j]]:
                     temp = retList[i]
                     retList[i] = retList[j]
@@ -60,13 +60,14 @@ class ChatBot():
         similarityScoresList = similarityScores.flatten()   #similarityScores is not a 1 dimensional array, so we flatten it
         indexOfQuote = self.sortIndexList(similarityScoresList)  #this gives us the indices of the most similar to least similar quotes
         self.quotes.remove(userInput)
-        if similarityScores[indexOfQuote[0]].any() != 0.00:
+        print(len(similarityScoresList), " and ", len(indexOfQuote))
+        if similarityScoresList[indexOfQuote[0]].any() != 0.00:
             return response + self.quotes[indexOfQuote[0]]
         else:
             return response + "I'm sorry, I didn't quite understand what you just typed."
 
 p = ChatBot()
-p.extractQuotes('anxiety.txt')
+p.extractQuotes('quotes.txt')
 
 print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!")
 exitWords = ['bye','quit','exit','see ya','good bye']

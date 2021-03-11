@@ -18,5 +18,3 @@ while(True):
             print("Calm Bot: " + cb.helloMessage(userInput))
         else:
             print("Calm Bot: " + cb.botResponse(userInput))
-
-
