@@ -15,8 +15,10 @@ nltk.download('punkt', quiet = True)  #this package is required to tokenize sent
 
 #Import quotes from file
 class ChatBot():
+
     CV = CountVectorizer()
     quotes = [] #lines taken from file will be placed in quotes and used to talk to user
+    
     def __init__(self):
         print("bot initialized")
         
@@ -42,33 +44,40 @@ class ChatBot():
     def sortIndexList(self, scoresList):
         length = len(scoresList)
         retList = list(range(0,length))
-
+        
         for i in range(length):
             for j in range(length):
                 if scoresList[retList[i]] > scoresList[retList[j]]:
                     temp = retList[i]
                     retList[i] = retList[j]
-                    retList[j] = retList[i]
+                    retList[j] = temp
         return retList
 
     def botResponse(self, userInput):
         userInput = userInput.lower()   #convert text to lowercase
         self.quotes.append(userInput)   #add users' input to end of quotes list
-        response = ' '                   #initialize the bots response
+        response = ' '      #initialize the bots response
         countArray = self.CV.fit_transform(self.quotes)             ##these two lines form the similarity scores between
         similarityScores = cosine_similarity(countArray[-1], countArray)    ##each quote and the users input to output the most similar one
         similarityScoresList = similarityScores.flatten()   #similarityScores is not a 1 dimensional array, so we flatten it
         indexOfQuote = self.sortIndexList(similarityScoresList)  #this gives us the indices of the most similar to least similar quotes
-        self.quotes.remove(userInput)
-        if similarityScores[indexOfQuote[0]].any() != 0.00:
+        indexOfQuote = indexOfQuote[1:]
+        if similarityScoresList[indexOfQuote[0]] != 0.00:
+            self.quotes.remove(userInput)
             return response + self.quotes[indexOfQuote[0]]
         else:
+            self.quotes.remove(userInput)   
             return response + "I'm sorry, I didn't quite understand what you just typed."
 
-p = ChatBot()
-p.extractQuotes('anxiety.txt')
+
+
+
+cb = ChatBot()
+cb.extractQuotes('quotes.txt') #we establish the quotes in the object
+print(len(cb.quotes))
 
 print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!")
+
 exitWords = ['bye','quit','exit','see ya','good bye']
 
 while(True):
@@ -76,7 +85,7 @@ while(True):
     if userInput.lower() in exitWords:
         print("It was really nice talking to you!")
     else:
-        if p.helloMessage(userInput) != None:
-            print("Calm Bot: " + p.helloMessage(userInput))
+        if cb.helloMessage(userInput) != None:
+            print("Calm Bot: " + cb.helloMessage(userInput))
         else:
-            print("Calm Bot: " + p.botResponse(userInput))
+            print("Calm Bot: " + cb.botResponse(userInput))
