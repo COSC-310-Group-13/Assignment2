@@ -23,7 +23,7 @@ class ChatBot():
         print("bot initialized")
         
     def extractQuotes(self, fileName):
-        file = open("quotes.txt", 'r', encoding='utf-8')
+        file = open(fileName, 'r', encoding='utf-8')
         text = file.read()
         file.close()
         self.quotes = nltk.sent_tokenize(text)
