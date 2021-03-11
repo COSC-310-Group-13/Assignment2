@@ -21,7 +21,7 @@ class ChatBot():
         print("bot initialized")
         
     def extractQuotes(self, fileName):
-        file = open('quotes.txt', 'r', encoding='utf-8')
+        file = open(fileName, 'r', encoding='utf-8')
         text = file.read()
         file.close()
         self.quotes = nltk.sent_tokenize(text)
@@ -43,12 +43,12 @@ class ChatBot():
         length = len(scoresList)
         retList = list(range(0,length))
 
-        for i in range(length):
-            for j in range(length):
+        for i in range(length - 1):
+            for j in range(length - 1):
                 if scoresList[retList[i]] > scoresList[retList[j]]:
                     temp = retList[i]
                     retList[i] = retList[j]
-                    retList[j] = retList[i]
+                    retList[j] = temp
         return retList
 
     def botResponse(self, userInput):
