@@ -14,8 +14,11 @@ This converstational bot was developed entirely in Python using the Natural Lang
 ## Installation
 
 To be able to run the chat bot, you need the nltk and sklearn packages.
-Open up command prompt and type the following:
-`pip install nltk`
-`pip install -U scikit-learn`
+Open up command prompt and type the following:  
+
+`pip install nltk`  
+
+`pip install -U scikit-learn`  
+
 The chat bot also auto installs these packages if you do not have them already installed.
 Afterwards, you may run the Main.py file and the bot should work accordingly.
