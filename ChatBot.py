@@ -27,6 +27,8 @@ class ChatBot():
     
     def __init__(self): 
         print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!") #initialize the bot
+
+        #extractQuotes function reads the quotes text file and tokenizes them into a list of sentences.
         
     def extractQuotes(self, fileName):
         file = open(fileName, 'r', encoding='utf-8')
@@ -46,6 +48,10 @@ class ChatBot():
         for word in userInput.split():
             if word in userHellos:
                 return random.choice(botHellos)
+
+        #The sortIndexList function turns the similarityScoresList from the botResponse function
+        #to output the indices of the each quote in decreasing order of similarity
+        #to the users' input
 
     def sortIndexList(self, scoresList):
         length = len(scoresList)
@@ -67,9 +73,10 @@ class ChatBot():
         similarityScores = cosine_similarity(countArray[-1], countArray)    ##each quote and the users input to output the most similar one
         similarityScoresList = similarityScores.flatten()   #similarityScores is not a 1 dimensional array, so we flatten it
         indexOfQuote = self.sortIndexList(similarityScoresList)  #this gives us the indices of the most similar to least similar quotes
-        indexOfQuote = indexOfQuote[1:]
-        if similarityScoresList[indexOfQuote[0]] != 0.00:
-            self.quotes.remove(userInput)
+        indexOfQuote = indexOfQuote[1:]     #remove the first element as it is the index of the users' input
+        
+        if similarityScoresList[indexOfQuote[0]] != 0.00:       #if there quotes similar to users' input it outputs most similar quote
+            self.quotes.remove(userInput)                       #otherwise, it outputs that it does not understand users' input
             return response + self.quotes[indexOfQuote[0]]
         else:
             self.quotes.remove(userInput)   
