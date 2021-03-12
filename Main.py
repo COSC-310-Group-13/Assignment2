@@ -6,19 +6,23 @@ from ChatBot import install
 install('nltk')
 install('scikit-learn')
 
-cb = ChatBot()
-cb.extractQuotes('quotes.txt') #we establish the quotes in the object
+def __main__():
+    cb = ChatBot()
+    cb.extractQuotes('quotes.txt') #we establish the quotes in the object
 
-print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!")
+    print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!")
 
-exitWords = ['bye','quit','exit','see ya','good bye'] #Exit the chat bot with common greetings
+    exitWords = ['bye','quit','exit','see ya','good bye'] #Exit the chat bot with common greetings
 
-while(True):
-    userInput = input()
-    if userInput.lower() in exitWords:
-        print("It was really nice talking to you!")
-    else:
-        if cb.helloMessage(userInput) != None:
-            print("Calm Bot: " + cb.helloMessage(userInput))
+    while(True):    #run a loop to keep prompting the user for input
+        print("You: ", end ='')
+        userInput = input()
+        if userInput.lower() in exitWords:
+            print("It was really nice talking to you!")
         else:
-            print("Calm Bot: " + cb.botResponse(userInput))
+            if cb.helloMessage(userInput) != None:
+                print("Calm Bot: " + cb.helloMessage(userInput))
+            else:
+                print("Calm Bot: " + cb.botResponse(userInput))
+
+__main__()
