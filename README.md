@@ -13,7 +13,7 @@ This converstational bot was developed entirely in Python using the Natural Lang
 
 ## Installation
 
-To be able to run the chat bot, you need the nltk and sklearn packages.
+To be able to run the chat bot, you need the nltk and sklearn Python packages.
 Open up command prompt and type the following:  
 
 `pip install nltk`  
