@@ -11,21 +11,22 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 nltk.download('punkt', quiet = True)  #this package is required to tokenize sentences
 
-#This the class of the chatbot which reads quotes from a file and places them into a list
-#When the bot runs, it runs a similarity test between each quote in the list and the input of the user
-#The quote that is most similar to the users' input is outputted so that quotes match the topic the user talks about
 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+#This the class of the chatbot which reads quotes from a file and places them into
+#a list. When the user enters an input, the bot traverses the users' input to check if
+#it contains any greeting words. If it does not contain any greeting words, the
+#bot scores each quote from the file based on how similar it is to the users'
+#input. #The quote that is most similar to the users' input is outputted so that
+#quotes match the topic the user talks about.
 
-#Import quotes from file
+
 class ChatBot():
 
     CV = CountVectorizer()
     quotes = [] #lines taken from file will be placed in quotes and used to talk to user
     
-    def __init__(self):
-        print("bot initialized")
+    def __init__(self): 
+        print("Calm Bot: Hello, my name is Calm Bot and I'm here to help you!") #initialize the bot
         
     def extractQuotes(self, fileName):
         file = open(fileName, 'r', encoding='utf-8')
@@ -61,7 +62,7 @@ class ChatBot():
     def botResponse(self, userInput):
         userInput = userInput.lower()   #convert text to lowercase
         self.quotes.append(userInput)   #add users' input to end of quotes list
-        response = ' '      #initialize the bots response
+        response = ''      #initialize the bots response
         countArray = self.CV.fit_transform(self.quotes)             ##these two lines form the similarity scores between
         similarityScores = cosine_similarity(countArray[-1], countArray)    ##each quote and the users input to output the most similar one
         similarityScoresList = similarityScores.flatten()   #similarityScores is not a 1 dimensional array, so we flatten it
@@ -72,5 +73,5 @@ class ChatBot():
             return response + self.quotes[indexOfQuote[0]]
         else:
             self.quotes.remove(userInput)   
-            return response + "I'm sorry, I didn't quite understand what you just typed."
+            return response + ' ' + "I'm sorry, I didn't quite understand what you just typed."
 
