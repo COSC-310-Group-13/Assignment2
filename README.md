@@ -20,5 +20,4 @@ Open up command prompt and type the following:
 
 `pip install -U scikit-learn`  
 
-The chat bot also auto installs these packages if you do not have them already installed.
 Afterwards, you may run the Main.py file and the bot should work accordingly.
