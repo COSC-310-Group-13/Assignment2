@@ -1,5 +1,5 @@
 #Libraries needed to install:
-    # nltk, scikit-learn
+# nltk, scikit-learn
 
 #Import libraries
 import subprocess
@@ -41,9 +41,9 @@ class ChatBot():
         userInput = userInput.lower() #make everything lowercase so bot can doesn't deal with cases
 
         #ChatBot hello messages
-        botHellos = ['Hello','Good day', 'Hey!', 'Hi!', 'Nice to meet you!', 'Hello there!']
+        botHellos = ['Hello', 'Good day', 'Hey!', 'Hi!', 'Nice to meet you!', 'Hello there!']
         #User possible hello messages
-        userHellos = ['hello', "what's up", 'hey', 'hi', 'hello', 'howdy','sup','hey there']
+        userHellos = ['hello', "what's up", 'hey', 'hi', 'hello', 'howdy', 'sup', 'hey there']
 
         for word in userInput.split():
             if word in userHellos:
@@ -55,7 +55,7 @@ class ChatBot():
 
     def sortIndexList(self, scoresList):
         length = len(scoresList)
-        retList = list(range(0,length))
+        retList = list(range(0, length))
         
         for i in range(length):
             for j in range(length):
