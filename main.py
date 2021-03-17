@@ -1,4 +1,4 @@
-from chatbot.ChatBot import ChatBot
+from chatbot.chatbot import ChatBot
 import sys
 
 #Main class where the bot will be run from.
