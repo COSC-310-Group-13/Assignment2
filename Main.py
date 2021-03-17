@@ -1,13 +1,14 @@
-from ChatBot import ChatBot
+from chatbot.ChatBot import ChatBot
 import sys
 
 #Main class where the bot will be run from.
+
 
 def __main__():
     cb = ChatBot()
     cb.extractQuotes('quotes.txt') #we establish the quotes in the object
 
-    exitWords = ['bye','quit','exit','see ya','good bye'] #Exit the chat bot with common greetings
+    exitWords = ['bye', 'quit', 'exit', 'see ya', 'good bye'] #Exit the chat bot with common greetings
 
     while(True):    #run a loop to keep prompting the user for input
         print("You: ", end ='')     
@@ -20,5 +21,6 @@ def __main__():
                 print("Calm Bot: " + cb.helloMessage(userInput))
             else:
                 print("Calm Bot: " + cb.botResponse(userInput))
+
 
 __main__()
