@@ -11,6 +11,13 @@ Our Team truly believes that anonymous online conversation with an intelligent c
 
 This converstational bot was developed entirely in Python using the Natural Language Processing library, Natural Language Toolkit(NLTK).
 
+The program is made up of two classes: chatbot and main
+>chatbot is the class that can has all the attributes of the chat bot and its methods
+
+>main class is where a chatbot object gets created and is run to extract quotes from file as  
+>well as running a loop to continuously ask the user for input with a loop in the class until  
+>they enter an exit word  
+
 ## Installation
 
 To be able to run the chat bot, you need the nltk and sklearn Python packages.
