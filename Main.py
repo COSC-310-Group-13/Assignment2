@@ -1,4 +1,5 @@
 from ChatBot import ChatBot
+import sys
 
 #Main class where the bot will be run from.
 
@@ -12,7 +13,8 @@ def __main__():
         print("You: ", end ='')     
         userInput = input()     #Ask user for input
         if userInput.lower() in exitWords:
-            print("It was really nice talking to you!")
+            print("Calm Bot: It was really nice talking to you!")
+            sys.exit()
         else:
             if cb.helloMessage(userInput) != None:  #if hello returns nothing, output a quote
                 print("Calm Bot: " + cb.helloMessage(userInput))
